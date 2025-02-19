@@ -1,4 +1,5 @@
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Container, Spinner, Alert, Input } from "reactstrap";
@@ -102,26 +103,30 @@ const ContactsBoard = () => {
 
   return (
     <Container className="board-div">
-      <h1>All Contacts</h1>
-
-      <div className="filter-container">
-        <Input
-          type="text"
-          placeholder={`Search by ${selectedFilter}...`}
-          value={searchQuery}
-          onChange={handleSearchChange}
-        />
-        <select
-          value={selectedFilter}
-          onChange={handleFilterChange}
-          className="filter-select"
-        >
-          <option value="firstName"> First Name</option>
-          <option value="lastName">Surname</option>
-          <option value="city">City</option>
-          <option value="email">Email</option>
-        </select>
+      <div className="row">
+        <div className="col-sm">
+          <Input
+            type="text"
+            placeholder={`Search by ${selectedFilter}...`}
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+        </div>
+        <div className="col-sm">
+          <select
+            value={selectedFilter}
+            onChange={handleFilterChange}
+            className="filter-select"
+          >
+            <option value="firstName"> First Name</option>
+            <option value="lastName">Surname</option>
+            <option value="city">City</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
       </div>
+
+      <h1>All Contacts</h1>
 
       <div className="items-container">
         <ContactsTable

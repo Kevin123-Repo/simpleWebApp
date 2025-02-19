@@ -171,7 +171,7 @@ const EditTable = ({ contact }) => {
           </FormGroup>
         </div>
       </div>
-      <div className="=" row>
+      <div className=" ow">
         <div className="col-sm">
           <FormGroup>
             <Label for="email">Email</Label>

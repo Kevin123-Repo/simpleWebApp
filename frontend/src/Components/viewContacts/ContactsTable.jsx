@@ -1,9 +1,10 @@
 import { Button } from "reactstrap";
 const ContactsTable = ({ data, handleDelete, handleNavigate }) => {
   return (
+    <div className="table-container">
     <table className="table">
-      <thead>
-        <tr>
+      <thead className="th">
+        <tr className="tr">
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
@@ -21,8 +22,9 @@ const ContactsTable = ({ data, handleDelete, handleNavigate }) => {
             <td>{contact.address}</td>
             <td>{contact.city}</td>
             <td>{contact.postcode}</td>
-            <td>
+            <td className="button-group">
               <Button
+                className="button-delete"
                 color="danger"
                 size="sm"
                 onClick={() => handleDelete(contact._id)}
@@ -30,6 +32,7 @@ const ContactsTable = ({ data, handleDelete, handleNavigate }) => {
                 Delete
               </Button>
               <Button
+                className="button-edit"
                 color="warning"
                 size="sm"
                 onClick={() => {
@@ -39,11 +42,11 @@ const ContactsTable = ({ data, handleDelete, handleNavigate }) => {
                 Edit
               </Button>
             </td>
-            <td></td>
           </tr>
         ))}
       </tbody>
     </table>
+    </div>
   );
 };
 

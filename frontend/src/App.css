@@ -1,9 +1,94 @@
-.nav-link{
-position: sticky;
-padding: 15px;
-margin-top: 0px;
+.NavBar {
+  display: flex;
+  background-color: #333;
+
+  height: 45px;
+  justify-content: center;
+  align-items: center;
 }
-.navbar{
-  background-color: darkgray;
+.nav-link {
+  display: flex;
+  gap: 20px;
+}
+.nav-item {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: 1s ease-in-out;
+}
+.nav-item:hover {
+  background-color: yellow;
+  color: black;
+}
+.homepage {
+  text-align: center;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #45ea28;
+  border-radius: 10px;
+  background-color: #21fb37;
+  width: 80%;
+}
+.filter-select {
+  display: flex;
+  justify-content: center;
+  width: 300px;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 5px;
 }
 
+table {
+  width: 90%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  text-align: left;
+}
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  background: white;
+  padding: 15px;
+  margin: 40px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 85%;
+}
+
+.scrollable-container {
+  border-radius: 10px;
+  max-height: 400px; /* Set the height for scrolling */
+  overflow-y: auto; /* Allow vertical scrolling */
+  margin-top: 20px;
+  border: 1px solid #ddd; /* Optional: border around the scrollable container */
+}
+
+.items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scrollable-element {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+.button-group {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+input[type="text"],
+input[type="email"] {
+    width: calc(80% - 10px); 
+}

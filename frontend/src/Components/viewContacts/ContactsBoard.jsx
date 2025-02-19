@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { Container, Spinner, Alert, Input } from "reactstrap";
 import ContactsTable from "./ContactsTable";
 
-import "./contactsTable.css";
-
 const ContactsBoard = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,6 +62,8 @@ const ContactsBoard = () => {
   };
 
   const handleDelete = (contactId) => {
+    const confimDelete = window.confirm("Are you sure you want to delete?")
+    if(!confimDelete)return;
     axios
       .delete(`http://localhost:8080/contacts/${contactId}`)
       .then(() => {
@@ -104,15 +104,16 @@ const ContactsBoard = () => {
   return (
     <Container className="board-div">
       <div className="row">
-        <div className="col-sm">
+        <div className="filter-select">
           <Input
             type="text"
             placeholder={`Search by ${selectedFilter}...`}
             value={searchQuery}
             onChange={handleSearchChange}
+            className="filter-select"
           />
         </div>
-        <div className="col-sm">
+        <div className="filter-select">
           <select
             value={selectedFilter}
             onChange={handleFilterChange}

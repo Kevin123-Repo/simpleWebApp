@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const AddContactsForm = ({ handleUpdate }) => {
@@ -9,6 +10,7 @@ const AddContactsForm = ({ handleUpdate }) => {
   const [city, setCity] = useState("");
   const [email, setEmail] = useState("");
   const [postcode, setPostcode] = useState("");
+  const navigate = useNavigate();
 
   const validateForm = () => {
     if (
@@ -25,9 +27,9 @@ const AddContactsForm = ({ handleUpdate }) => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    //checking format
     if (validateForm()) {
       const dataToSend = {
         firstName: firstName,
@@ -37,7 +39,26 @@ const AddContactsForm = ({ handleUpdate }) => {
         city: city,
         postcode: postcode,
       };
-      axios
+      const response = await axios.get("http://localhost:8080/contacts");
+      const existingContacts = response.data;
+
+      // Check for match
+      const isDuplicate = existingContacts.find(
+        (contact) =>
+          contact.firstName === dataToSend.firstName &&
+          contact.lastName === dataToSend.lastName &&
+          contact.email === dataToSend.email &&
+          contact.address === dataToSend.address &&
+          contact.city === dataToSend.city &&
+          contact.postcode === dataToSend.postcode
+      );
+
+      if (isDuplicate) {
+        alert("This contact already exists!");
+        return;
+      }
+      //Posting new contact
+      await axios
         .post("http://localhost:8080/contacts", dataToSend)
         .then((response) => {
           console.log(response);
@@ -51,6 +72,7 @@ const AddContactsForm = ({ handleUpdate }) => {
       setFirstName("");
       setLastName("");
       setPostcode("");
+      navigate("/");
     }
   };
 
@@ -71,7 +93,6 @@ const AddContactsForm = ({ handleUpdate }) => {
           />
         </Col>
       </FormGroup>
-      <br />
       <FormGroup row>
         <Label for="lastName" sm={1}>
           Last Name
@@ -87,7 +108,6 @@ const AddContactsForm = ({ handleUpdate }) => {
           />
         </Col>
       </FormGroup>
-      <br />
       <FormGroup row>
         <Label for="address" sm={1}>
           Address
@@ -103,7 +123,6 @@ const AddContactsForm = ({ handleUpdate }) => {
           />
         </Col>
       </FormGroup>
-      <br />
       <FormGroup row>
         <Label for="city" sm={1}>
           City
@@ -119,7 +138,6 @@ const AddContactsForm = ({ handleUpdate }) => {
           />
         </Col>
       </FormGroup>
-      <br />
       <FormGroup row>
         <Label for="postcode" sm={1}>
           Postcode
@@ -135,7 +153,6 @@ const AddContactsForm = ({ handleUpdate }) => {
           />
         </Col>
       </FormGroup>
-      <br />
       <FormGroup row>
         <Label for="email" sm={1}>
           Email

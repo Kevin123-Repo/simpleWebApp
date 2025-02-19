@@ -28,9 +28,9 @@ The back-end is built using **Express.js** and uses **MongoDB** as the database.
 ### Setup
 
 1. Navigate to the `backend` folder.
-2. Create a `.env` file and set up your MongoDB URI:
+2. Edit the `.env` file and set up your MongoDB URI:
    ```sh
-   MONGO_URL=your_mongodb_connection_string
+   mongo_url = 'your_mongodb_connection_string'
    ```
 3. Start the server:
    ```sh

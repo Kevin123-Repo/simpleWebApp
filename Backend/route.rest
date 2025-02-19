@@ -1,0 +1,35 @@
+GET http://localhost:8080/contacts
+###
+
+GET http://localhost:8080/contacts/67b37be1133748efafdd7285
+
+###
+POST http://localhost:8080/contacts
+Content-Type: application/json
+
+{
+    "firstName": "ABc",
+    "lastName": "Chan",
+    "email":"abc@example.com",
+    "address": "123 Street Name",
+    "city": "London",
+    "postcode": "QWE 123"
+}
+
+###
+DELETE http://localhost:8080/contacts/67b2724a787821ff436fda41
+###
+
+PATCH http://localhost:8080/contacts/67b37be1133748efafdd7285
+Content-Type: application/json
+
+
+    {
+    "firstName": "ABc",
+    "lastName": "Chans",
+    "email":"abc@example.com",
+    "address": "123",
+    "city": "Glasglow",
+    "postcode": "123"
+}
+    

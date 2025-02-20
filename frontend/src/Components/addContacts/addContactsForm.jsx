@@ -110,7 +110,10 @@ const AddContactsForm = ({ handleUpdate }) => {
   };
 
   return (
+    <div>
+      <h1>Creating a new Contact</h1>
     <div className="inputForm-container">
+     
       <div className="name-row">
         <div className="firstName-col">
           <FormGroup>
@@ -198,6 +201,7 @@ const AddContactsForm = ({ handleUpdate }) => {
           Cancel
         </Button>
       </div>
+    </div>
     </div>
   );
 };

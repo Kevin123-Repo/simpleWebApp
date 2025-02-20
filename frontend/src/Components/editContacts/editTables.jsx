@@ -7,14 +7,14 @@ import { FormGroup, Label, Input, Button } from "reactstrap";
 
 const EditTable = ({ contact }) => {
   const { contactId } = useParams();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [city, setCity] = useState("");
-  const [postcode, setPostcode] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [isUpdated, setIsUpdated] = useState(false);
+  const [firstName, setFirstName] = useState("First Name");
+  const [lastName, setLastName] = useState("Last Name");
+  const [city, setCity] = useState(" ity");
+  const [postcode, setPostcode] = useState("Postcode");
+  const [address, setAddress] = useState("Address");
+  const [email, setEmail] = useState("setEmail");
   const navigate = useNavigate();
+ 
 
   //Added this useEffect as workaround to useState not syncing at beginning
   useEffect(() => {
@@ -92,22 +92,26 @@ const EditTable = ({ contact }) => {
         .patch(`http://localhost:8080/contacts/${contactId}`, Object(newData))
         .then((response) => {
           console.log("Updated successfully", response.data, response.status);
-          setIsUpdated(true);
+          window.alert("Changes successfully saved")
           navigate("/");
         })
         .catch((err) => {
           console.error("Error", err);
+          window.alert("Changes were unsuccessful")
         });
     } else {
       console.log("Nothing to do");
       navigate("/");
     }
   };
+  const handleCancel = ()=>{
+    navigate("/")
+  }
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm">
+    <div className="inputForm-container">
+      <div className="name-row">
+        <div className="firstName-col">
           <FormGroup>
             <Label for="firstName">First Name</Label>
             <Input
@@ -120,7 +124,7 @@ const EditTable = ({ contact }) => {
           </FormGroup>
         </div>
 
-        <div className="col-sm">
+        <div className="lastName-col">
           <FormGroup>
             <Label for="lastName">Last Name</Label>
             <Input
@@ -133,8 +137,8 @@ const EditTable = ({ contact }) => {
           </FormGroup>
         </div>
       </div>
-      <div class="row">
-        <div className="col-sm">
+      <div class="address-row">
+        <div className="address-col">
           <FormGroup>
             <Label for="address">Address</Label>
             <Input
@@ -146,7 +150,7 @@ const EditTable = ({ contact }) => {
             />
           </FormGroup>
         </div>
-        <div className="col-sm">
+        <div className="city-col">
           <FormGroup>
             <Label for="city">City</Label>
             <Input
@@ -158,7 +162,7 @@ const EditTable = ({ contact }) => {
             />
           </FormGroup>
         </div>
-        <div className="col-sm">
+        <div className="postcode-col">
           <FormGroup>
             <Label for="postcode">Postcode</Label>
             <Input
@@ -171,8 +175,8 @@ const EditTable = ({ contact }) => {
           </FormGroup>
         </div>
       </div>
-      <div className=" ow">
-        <div className="col-sm">
+      <div className="email-row">
+        <div className="email-col">
           <FormGroup>
             <Label for="email">Email</Label>
             <Input
@@ -186,12 +190,9 @@ const EditTable = ({ contact }) => {
         </div>
       </div>
       <div>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button className="input-button-submit" onClick={handleSubmit}>Submit</Button>
+        <Button className="input-button-cancel" onClick={handleCancel}>Cancel</Button>
       </div>
-
-      {isUpdated && (
-        <p className="text-success">Contact updated successfully!</p>
-      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Col, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { FormGroup, Label, Input, Button } from "reactstrap";
 
 const AddContactsForm = ({ handleUpdate }) => {
   const [firstName, setFirstName] = useState("");
@@ -27,6 +27,35 @@ const AddContactsForm = ({ handleUpdate }) => {
     return true;
   };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "firstName") {
+      setFirstName(value);
+      console.log(" New First Name = " + value);
+    }
+    if (name === "lastName") {
+      console.log("New Last Name " + value);
+      setLastName(value);
+      console.log("New Last Name Value = " + lastName);
+    }
+    if (name === "city") {
+      setCity(value);
+      console.log(" New City = " + value);
+    }
+    if (name === "postcode") {
+      setPostcode(value);
+      console.log(" New Postcode = " + value);
+    }
+    if (name === "address") {
+      setAddress(value);
+      console.log(" New Address = " + value);
+    }
+    if (name === "email") {
+      setEmail(value);
+      console.log(" New Email = " + value);
+    }
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     //checking format
@@ -44,13 +73,13 @@ const AddContactsForm = ({ handleUpdate }) => {
 
       // Check for match
       const isDuplicate = existingContacts.find(
-        (contact) =>
-          contact.firstName === dataToSend.firstName &&
-          contact.lastName === dataToSend.lastName &&
-          contact.email === dataToSend.email &&
-          contact.address === dataToSend.address &&
-          contact.city === dataToSend.city &&
-          contact.postcode === dataToSend.postcode
+        (existingContacts) =>
+          existingContacts.firstName === dataToSend.firstName &&
+          existingContacts.lastName === dataToSend.lastName &&
+          existingContacts.email === dataToSend.email &&
+          existingContacts.address === dataToSend.address &&
+          existingContacts.city === dataToSend.city &&
+          existingContacts.postcode === dataToSend.postcode
       );
 
       if (isDuplicate) {
@@ -76,100 +105,100 @@ const AddContactsForm = ({ handleUpdate }) => {
     }
   };
 
+  const handleCancel = () => {
+    navigate("/");
+  };
+
   return (
-    <Form className="addContacts-form" onSubmit={handleSubmit}>
-      <FormGroup row>
-        <Label for="firstName" sm={1}>
-          First Name
-        </Label>
-        <Col sm={10}>
-          <Input
-            type="text"
-            name="firstName"
-            id="firstName"
-            placeholder="Enter First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="lastName" sm={1}>
-          Last Name
-        </Label>
-        <Col sm={10}>
-          <Input
-            type="text"
-            name="lastName"
-            id="lastName"
-            placeholder="Enter Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="address" sm={1}>
-          Address
-        </Label>
-        <Col sm={10}>
-          <Input
-            type="text"
-            name="Address"
-            id="Address"
-            placeholder="Enter Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="city" sm={1}>
-          City
-        </Label>
-        <Col sm={10}>
-          <Input
-            type="text"
-            name="city"
-            id="city"
-            placeholder="Enter City"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="postcode" sm={1}>
-          Postcode
-        </Label>
-        <Col sm={10}>
-          <Input
-            type="text"
-            name="postcode"
-            id="postcode"
-            placeholder="Enter Postcode"
-            value={postcode}
-            onChange={(e) => setPostcode(e.target.value)}
-          />
-        </Col>
-      </FormGroup>
-      <FormGroup row>
-        <Label for="email" sm={1}>
-          Email
-        </Label>
-        <Col sm={10}>
-          <Input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Col>
-      </FormGroup>
-      <Button>Submit</Button>
-    </Form>
+    <div className="inputForm-container">
+      <div className="name-row">
+        <div className="firstName-col">
+          <FormGroup>
+            <Label for="firstName">First Name</Label>
+            <Input
+              id="firstName"
+              name="firstName"
+              placeholder="Enter First Name"
+              type="string"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </div>
+
+        <div className="lastName-col">
+          <FormGroup>
+            <Label for="lastName">Last Name</Label>
+            <Input
+              id="lastName"
+              name="lastName"
+              placeholder="Enter Last Name"
+              type="string"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </div>
+      </div>
+      <div class="address-row">
+        <div className="address-col">
+          <FormGroup>
+            <Label for="address">Address</Label>
+            <Input
+              id="address"
+              name="address"
+              placeholder="Enter Address"
+              type="string"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </div>
+        <div className="city-col">
+          <FormGroup>
+            <Label for="city">City</Label>
+            <Input
+              id="city"
+              name="city"
+              placeholder="Enter City"
+              type="string"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </div>
+        <div className="postcode-col">
+          <FormGroup>
+            <Label for="postcode">Postcode</Label>
+            <Input
+              id="postcode"
+              name="postcode"
+              placeholder="Enter Postcode"
+              type="string"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </div>
+      </div>
+      <div className="email-row">
+        <div className="email-col">
+          <FormGroup>
+            <Label for="email">Email</Label>
+            <Input
+              id="email"
+              name="email"
+              placeholder="Enter valid Email (e.g.abc@example.com)"
+              type="email"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </div>
+      </div>
+      <div>
+        <Button className="input-button-submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+        <Button className="input-button-cancel" onClick={handleCancel}>
+          Cancel
+        </Button>
+      </div>
+    </div>
   );
 };
 

@@ -5,6 +5,7 @@ import AddContactsForm from "./Components/addContacts/addContactsForm";
 import HomePage from "./Components/Homepage";
 import EditForm from "./Components/editContacts/editForm";
 import "./App.css";
+import WeatherPage from "./Components/weatherPage/weatherApp";
 
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<HomePage/>} /> 
           <Route path="/create" element={<AddContactsForm />} /> 
           <Route path="/edit/:contactId" element={<EditForm />} /> 
+          <Route path="/weather" element={<WeatherPage/>}/>
         </Routes>
       </div>
     </Router>
